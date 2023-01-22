@@ -104,7 +104,11 @@ def pil_to_url(img, format='png'):
 
 def pil_to_html(img, margin=1):
     mattr = ' style="margin:%dpx"' % margin
-    return '<img src="%s"%s>' % (pil_to_url(img), mattr)
+
+    if hasattr(img, 'alt'):
+      return '<img alt="%s" src="%s"%s>' % (img.alt, pil_to_url(img), mattr)
+    else:
+      return '<img src="%s"%s>' % (pil_to_url(img), mattr)
 
 def a(x, cols=None):
     global g_buffer
